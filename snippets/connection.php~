@@ -1,0 +1,37 @@
+<?php
+  $connectionInstance;
+
+  function CreateConnection(){
+    //DEV
+    $dbname = "gafete";
+    $dbhostname = "localhost";
+    $dbusername = "root";
+    $dbuserpassword = "8115652980";
+
+
+    /*
+      PROD
+      $dbname = "966058_gafetes";
+      $dbhostname = "mariadb-007.wc1:3306";
+      $dbusername = "966058_gafdvd";
+      $dbuserpassword = "Tr6u5leq1";
+    */
+    $conn = new mysqli($dbhostname, $dbusername, $dbuserpassword, $dbname);
+
+    //var_dump($conn);
+    if($conn->connect_errno){
+      //$response = "Failed to connect to MySQL: " . mysqli_connect_error();
+      $conn = null;
+      exit();
+    }
+
+    return $conn;
+  }
+
+  function CloseConnection(){
+    if(isset($connectionInstance)){
+      mysqli_close($connectionInstance);
+    }
+  }
+
+?>
